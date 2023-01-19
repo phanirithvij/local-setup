@@ -1,0 +1,24 @@
+---
+
+- name: Setup vagrant alpine box
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  become: true
+  tasks:
+    - name: Update repositories
+      community.general.apk:
+        update_cache: true
+    - name: Install fish, micro
+      community.general.apk:
+        name: fish,micro
+        state: present
+    - name: change shell to fish 
+      user:
+        name: "vagrant"
+        shell: /usr/bin/fish
+    - name: Ensure ansible windows collection is installed
+      command: ansible-galaxy collection install community.windows
+    - name: Setup Windows machine
+      become: false
+      command: ansible-playbook -v -i /vagrant/inventory --limit="win" /vagrant/winsetup.yml --vault-password-file /vagrant/vault-passwd

@@ -1,0 +1,38 @@
+---
+- name: Setup Windows machine
+  hosts: win
+  vars_files:
+    - vars/ssh_creds.yml
+  gather_facts: false
+  tasks:
+    - name: Check which python is being used
+      ansible.windows.win_shell: where.exe python && python -V
+      register: pyverout
+      args:
+        executable: pwsh
+      changed_when: false
+    - ansible.builtin.debug:
+        msg: "{{pyverout.stdout_lines}}"
+    - name: Ping hosts
+      ansible.windows.win_ping:
+    - name: Set openssh shell to pwsh
+      # https://stackoverflow.com/a/61155747/8608146
+      ansible.windows.win_shell: |
+        if (Test-Path -Path registry::HKLM\SOFTWARE\OpenSSH*) {
+            if ((Get-ItemProperty "HKLM:\SOFTWARE\OpenSSH").PSObject.Properties.Name -contains 'DefaultShell') {
+                if ((Get-ItemPropertyValue "HKLM:\SOFTWARE\OpenSSH" DefaultShell) -eq 'C:\Program Files\PowerShell\7\pwsh.exe') {
+                    exit
+                }
+            }
+        }
+        New-ItemProperty -Path "HKLM:\SOFTWARE\OpenSSH" -Name DefaultShell -Value 'C:\Program Files\PowerShell\7\pwsh.exe' -PropertyType String -Force
+      args:
+        executable: pwsh
+      register: regout
+      changed_when: 'regout.stdout != ""'
+    - debug:
+        msg: "{{regout.stdout_lines}}"
+      when: "regout.stdout != ''"
+    - name: Install scoop packages.
+      community.windows.win_scoop:
+        name: scoop

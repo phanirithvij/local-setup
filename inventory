@@ -1,0 +1,7 @@
+[win]
+192.168.1.3
+
+[win:vars]
+ansible_connection=ssh
+ansible_shell_type=powershell
+ansible_shell_executable=pwsh
