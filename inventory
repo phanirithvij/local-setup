@@ -1,3 +1,8 @@
+localhost
+
+[localhost:vars]
+ansible_python_interpreter=/usr/bin/python
+
 [win]
 192.168.1.3
 

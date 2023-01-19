@@ -19,8 +19,9 @@ Vagrant.configure("2") do |config|
         end
 		alpine.vm.provision "ansible_local" do |ansible|
 			ansible.verbose = "v"
+			ansible.config_file = "ansible.cfg"
 			ansible.inventory_path = "inventory"
-			# ansible.limit = "alpine"
+			ansible.limit = "localhost"
 			ansible.playbook = "main.yml"
 		end
 	end

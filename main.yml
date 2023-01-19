@@ -5,20 +5,55 @@
   connection: local
   gather_facts: no
   become: true
+  vars:
+    os_environment:
+      - k: EDITOR
+        v: micro
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: 'False'
+    ANSIBLE_CONFIG: '/vagrant/ansible.cfg'
   tasks:
+    - name: Customize /etc/environment
+      ansible.builtin.lineinfile:
+        dest: "/etc/environment"
+        state: present
+        regexp: "^{{ item.k }}="
+        line: "{{ item.k }}={{ item.v }}"
+      with_items: "{{ os_environment }}"
     - name: Update repositories
       community.general.apk:
         update_cache: true
-    - name: Install fish, micro
+    - name: Install fish,micro,lf
       community.general.apk:
-        name: fish,micro
+        name: fish,micro,lf,py3-pip,py3-setuptools
         state: present
-    - name: change shell to fish 
-      user:
-        name: "vagrant"
-        shell: /usr/bin/fish
+    - name: Install python setuptools (pexpect)
+      community.general.apk:
+        name: py3-pip,py3-setuptools
+        state: present
+    # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/expect_module.html#requirements
+    - name: Install pexpect (ansible.builtin.expect)
+      pip:
+        name: pexpect
+    - name: Install shadow (chsh)
+      community.general.apk:
+        name: shadow
+        state: present
+    # https://stackoverflow.com/a/47948430/8608146
+    - name: Change shell to fish
+      expect:
+        command: "chsh -s /usr/bin/fish vagrant"
+        responses:
+          (?i)password: "vagrant"
+        creates: ".shell_is_fish"
+      # no_log: true
+    - name: Set Env Vars
+      with_items: "{{ os_environment }}"
+      shell: 'set -Ux {{item.k}} "{{item.v}}"'
+      args:
+        executable: fish
+    # TODO idempotent these
     - name: Ensure ansible windows collection is installed
-      command: ansible-galaxy collection install community.windows
+      command: 'ansible-galaxy collection install community.windows'
     - name: Setup Windows machine
-      become: false
-      command: ansible-playbook -v -i /vagrant/inventory --limit="win" /vagrant/winsetup.yml --vault-password-file /vagrant/vault-passwd
+      command: 'ansible-playbook -v -i /vagrant/inventory --limit="win" /vagrant/winsetup.yml --vault-password-file /vagrant/vault-passwd'
