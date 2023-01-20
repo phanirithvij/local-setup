@@ -1,8 +1,8 @@
 Vagrant.configure("2") do |config|
 	config.vm.define "alpine" do |alpine|
 		# config.vm.network "forwarded_port", guest: 80, host: 8180
-		# config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__args: ["--verbose", "--archive", "--delete", "-z"]
-		config.vm.synced_folder ".", "/vagrant"
+		config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__args: ["--verbose", "--archive", "--delete", "-z"]
+		# config.vm.synced_folder ".", "/vagrant"
 		alpine.vm.box = "boxomatic/alpine-3.17"
 		alpine.vm.box_version = "20221221.0.1"
 		alpine.vm.box_check_update = false
