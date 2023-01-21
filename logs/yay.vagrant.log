@@ -1,0 +1,261 @@
+$ yay -S virtualbox linux515-virtualbox-host-modules vagrant
+
+warning: virtualbox-7.0.4-1 is up to date -- reinstalling
+warning: linux515-virtualbox-host-modules-7.0.4-7 is up to date -- reinstalling
+resolving dependencies...
+looking for conflicting packages...
+warning: dependency cycle detected:
+warning: rubygems will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-abbrev will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-base64 will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-benchmark will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-bigdecimal will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-bundler will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-cgi will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-csv will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-date will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-delegate will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-did_you_mean will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-digest will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-drb will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-ruby2_keywords will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-english will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-erb will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-etc will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-fcntl will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-fiddle will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-fileutils will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-find will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-forwardable will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-getoptlong will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-io-console will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-io-nonblock will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-io-wait will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-ipaddr will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-irb will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-reline will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-json will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-logger will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-mutex_m will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-net-http will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-uri will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-open-uri will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-stringio will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-time will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-psych will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-racc will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-rdoc will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-tmpdir will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-minitest will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-power_assert will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-rake will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-rexml will be installed before its ruby dependency
+warning: dependency cycle detected:
+warning: ruby-test-unit will be installed before its ruby dependency
+
+Packages (52) ruby-3.0.4-20  ruby-abbrev-0.1.0-4  ruby-base64-0.1.1-4
+              ruby-benchmark-0.2.0-4  ruby-bigdecimal-3.1.2-4
+              ruby-bundledgems-3.0.4-20  ruby-bundler-2.3.25-1
+              ruby-cgi-0.3.6-1  ruby-csv-3.2.5-4  ruby-date-3.2.2-4
+              ruby-delegate-0.2.0-4  ruby-did_you_mean-1.6.1-4
+              ruby-digest-3.1.0-6  ruby-drb-2.1.0-5  ruby-english-0.7.1-5
+              ruby-erb-4.0.2-1  ruby-etc-1.3.0-6  ruby-fcntl-1.0.1-4
+              ruby-fiddle-1.1.0-4  ruby-fileutils-1.6.0-4  ruby-find-0.1.1-4
+              ruby-forwardable-1.3.2-6  ruby-getoptlong-0.1.1-3
+              ruby-io-console-0.5.11-3  ruby-io-nonblock-0.1.0-3
+              ruby-io-wait-0.2.3-4  ruby-ipaddr-1.2.4-3  ruby-irb-1.4.2-1
+              ruby-json-2.6.2-2  ruby-logger-1.5.1-3  ruby-minitest-5.16.3-1
+              ruby-mutex_m-0.1.1-3  ruby-net-http-0.2.2-2
+              ruby-open-uri-0.2.0-3  ruby-power_assert-2.0.2-1
+              ruby-psych-4.0.6-1  ruby-racc-1.6.0-3  ruby-rake-13.0.6-1
+              ruby-rdoc-6.4.0-4  ruby-reline-0.3.1-2  ruby-rexml-3.2.5-1
+              ruby-ruby2_keywords-0.0.5-1  ruby-stdlib-3.0.4-20
+              ruby-stringio-3.0.2-4  ruby-test-unit-3.5.7-1  ruby-time-0.2.0-4
+              ruby-tmpdir-0.1.2-3  ruby-uri-0.11.0-5  rubygems-3.3.25-1
+              linux515-virtualbox-host-modules-7.0.4-7  vagrant-2.3.4-1
+              virtualbox-7.0.4-1
+
+Total Download Size:    43.37 MiB
+Total Installed Size:  319.50 MiB
+Net Upgrade Size:      139.14 MiB
+
+:: Proceed with installation? [Y/n]
+:: Retrieving packages...
+ vagrant-2.3.4-1-...    37.0 MiB  10.2 MiB/s 00:04 [######################] 100%
+ ruby-3.0.4-20-x86_64    2.8 MiB  8.59 MiB/s 00:00 [######################] 100%
+ ruby-rdoc-6.4.0-...   689.1 KiB  3.74 MiB/s 00:00 [######################] 100%
+ rubygems-3.3.25-...   564.1 KiB  3.44 MiB/s 00:00 [######################] 100%
+ ruby-bundler-2.3...   390.9 KiB  2.60 MiB/s 00:00 [######################] 100%
+ ruby-test-unit-3...   205.4 KiB  1920 KiB/s 00:00 [######################] 100%
+ ruby-minitest-5....   126.5 KiB   904 KiB/s 00:00 [######################] 100%
+ ruby-date-3.2.2-...   115.0 KiB   822 KiB/s 00:00 [######################] 100%
+ ruby-irb-1.4.2-1-any  114.5 KiB   954 KiB/s 00:00 [######################] 100%
+ ruby-racc-1.6.0-...   106.0 KiB   938 KiB/s 00:00 [######################] 100%
+ ruby-reline-0.3....   103.7 KiB   797 KiB/s 00:00 [######################] 100%
+ ruby-csv-3.2.5-4-any  102.7 KiB   856 KiB/s 00:00 [######################] 100%
+ ruby-json-2.6.2-...    92.5 KiB   791 KiB/s 00:00 [######################] 100%
+ ruby-psych-4.0.6...    84.2 KiB   647 KiB/s 00:00 [######################] 100%
+ ruby-rexml-3.2.5...    81.9 KiB   500 KiB/s 00:00 [######################] 100%
+ ruby-bigdecimal-...    81.1 KiB   639 KiB/s 00:00 [######################] 100%
+ ruby-net-http-0....    78.5 KiB   523 KiB/s 00:00 [######################] 100%
+ ruby-rake-13.0.6...    75.0 KiB   722 KiB/s 00:00 [######################] 100%
+ ruby-fiddle-1.1....    63.1 KiB   574 KiB/s 00:00 [######################] 100%
+ ruby-cgi-0.3.6-1...    62.1 KiB   621 KiB/s 00:00 [######################] 100%
+ ruby-uri-0.11.0-...    58.0 KiB   245 KiB/s 00:00 [######################] 100%
+ ruby-drb-2.1.0-5-any   55.5 KiB   491 KiB/s 00:00 [######################] 100%
+ ruby-digest-3.1....    42.7 KiB   347 KiB/s 00:00 [######################] 100%
+ ruby-did_you_mea...    32.2 KiB   301 KiB/s 00:00 [######################] 100%
+ ruby-power_asser...    30.6 KiB   235 KiB/s 00:00 [######################] 100%
+ ruby-fileutils-1...    30.1 KiB   258 KiB/s 00:00 [######################] 100%
+ ruby-stringio-3....    29.7 KiB   241 KiB/s 00:00 [######################] 100%
+ ruby-logger-1.5....    23.7 KiB   208 KiB/s 00:00 [######################] 100%
+ ruby-erb-4.0.2-1-any   22.2 KiB   210 KiB/s 00:00 [######################] 100%
+ ruby-io-console-...    20.6 KiB   182 KiB/s 00:00 [######################] 100%
+ ruby-etc-1.3.0-6...    20.0 KiB   150 KiB/s 00:00 [######################] 100%
+ ruby-ipaddr-1.2....    19.2 KiB   120 KiB/s 00:00 [######################] 100%
+ ruby-open-uri-0....    17.5 KiB   141 KiB/s 00:00 [######################] 100%
+ ruby-benchmark-0...    16.0 KiB   123 KiB/s 00:00 [######################] 100%
+ ruby-time-0.2.0-...    15.2 KiB  85.6 KiB/s 00:00 [######################] 100%
+ ruby-getoptlong-...    13.6 KiB  92.6 KiB/s 00:00 [######################] 100%
+ ruby-delegate-0....    12.7 KiB  79.1 KiB/s 00:00 [######################] 100%
+ ruby-forwardable...    11.2 KiB   105 KiB/s 00:00 [######################] 100%
+ ruby-io-wait-0.2...     9.9 KiB  73.1 KiB/s 00:00 [######################] 100%
+ ruby-fcntl-1.0.1...     8.2 KiB  60.4 KiB/s 00:00 [######################] 100%
+ ruby-english-0.7...     7.9 KiB  45.6 KiB/s 00:00 [######################] 100%
+ ruby-base64-0.1....     7.7 KiB  25.7 KiB/s 00:00 [######################] 100%
+ ruby-abbrev-0.1....     7.5 KiB  21.1 KiB/s 00:00 [######################] 100%
+ ruby-io-nonblock...     7.4 KiB  43.0 KiB/s 00:00 [######################] 100%
+ ruby-mutex_m-0.1...     7.3 KiB  60.6 KiB/s 00:00 [######################] 100%
+ ruby-tmpdir-0.1....     7.2 KiB  58.1 KiB/s 00:00 [######################] 100%
+ ruby-ruby2_keywo...     7.2 KiB  28.3 KiB/s 00:00 [######################] 100%
+ ruby-find-0.1.1-...     7.1 KiB  28.0 KiB/s 00:00 [######################] 100%
+ ruby-stdlib-3.0....     2.8 KiB  16.3 KiB/s 00:00 [######################] 100%
+ ruby-bundledgems...     2.7 KiB  22.1 KiB/s 00:00 [######################] 100%
+ Total (50/50)          43.4 MiB  2.34 MiB/s 00:19 [######################] 100%
+(52/52) checking keys in keyring                   [######################] 100%
+(52/52) checking package integrity                 [######################] 100%
+(52/52) loading package files                      [######################] 100%
+(52/52) checking for file conflicts                [######################] 100%
+(52/52) checking available disk space              [######################] 100%
+:: Running pre-transaction hooks...
+(1/1) Save Linux kernel modules
+:: Processing package changes...
+( 1/52) reinstalling linux515-virtualbox-host-...  [######################] 100%
+In order to use the new version, reload all virtualbox modules manually.
+( 2/52) reinstalling virtualbox                    [######################] 100%
+( 3/52) installing rubygems                        [######################] 100%
+( 4/52) installing ruby-abbrev                     [######################] 100%
+( 5/52) installing ruby-base64                     [######################] 100%
+( 6/52) installing ruby-benchmark                  [######################] 100%
+( 7/52) installing ruby-bigdecimal                 [######################] 100%
+( 8/52) installing ruby-bundler                    [######################] 100%
+( 9/52) installing ruby-cgi                        [######################] 100%
+(10/52) installing ruby-csv                        [######################] 100%
+(11/52) installing ruby-date                       [######################] 100%
+(12/52) installing ruby-delegate                   [######################] 100%
+(13/52) installing ruby-did_you_mean               [######################] 100%
+(14/52) installing ruby-digest                     [######################] 100%
+(15/52) installing ruby-ruby2_keywords             [######################] 100%
+(16/52) installing ruby-drb                        [######################] 100%
+(17/52) installing ruby-english                    [######################] 100%
+(18/52) installing ruby-erb                        [######################] 100%
+(19/52) installing ruby-etc                        [######################] 100%
+(20/52) installing ruby-fcntl                      [######################] 100%
+(21/52) installing ruby-fiddle                     [######################] 100%
+(22/52) installing ruby-fileutils                  [######################] 100%
+(23/52) installing ruby-find                       [######################] 100%
+(24/52) installing ruby-forwardable                [######################] 100%
+(25/52) installing ruby-getoptlong                 [######################] 100%
+(26/52) installing ruby-io-console                 [######################] 100%
+(27/52) installing ruby-io-nonblock                [######################] 100%
+(28/52) installing ruby-io-wait                    [######################] 100%
+(29/52) installing ruby-ipaddr                     [######################] 100%
+(30/52) installing ruby-reline                     [######################] 100%
+(31/52) installing ruby-irb                        [######################] 100%
+(32/52) installing ruby-json                       [######################] 100%
+(33/52) installing ruby-logger                     [######################] 100%
+(34/52) installing ruby-mutex_m                    [######################] 100%
+(35/52) installing ruby-uri                        [######################] 100%
+(36/52) installing ruby-net-http                   [######################] 100%
+(37/52) installing ruby-stringio                   [######################] 100%
+(38/52) installing ruby-time                       [######################] 100%
+(39/52) installing ruby-open-uri                   [######################] 100%
+(40/52) installing ruby-psych                      [######################] 100%
+(41/52) installing ruby-racc                       [######################] 100%
+(42/52) installing ruby-rdoc                       [######################] 100%
+(43/52) installing ruby-tmpdir                     [######################] 100%
+(44/52) installing ruby-stdlib                     [######################] 100%
+(45/52) installing ruby-minitest                   [######################] 100%
+(46/52) installing ruby-power_assert               [######################] 100%
+(47/52) installing ruby-rake                       [######################] 100%
+(48/52) installing ruby-rexml                      [######################] 100%
+(49/52) installing ruby-test-unit                  [######################] 100%
+(50/52) installing ruby-bundledgems                [######################] 100%
+(51/52) installing ruby                            [######################] 100%
+Optional dependencies for ruby
+    ruby-docs: Ruby documentation
+    tk: for Ruby/TK [installed]
+(52/52) installing vagrant                         [######################] 100%
+:: Running post-transaction hooks...
+( 1/10) Creating system user accounts...
+( 2/10) Reloading system manager configuration...
+( 3/10) Reloading device manager configuration...
+( 4/10) Arming ConditionNeedsUpdate...
+( 5/10) Updating the MIME type database...
+( 6/10) Updating module dependencies...
+( 7/10) Refreshing PackageKit...
+( 8/10) Updating icon theme caches...
+( 9/10) Restore Linux kernel modules
+
+==> Warning:
+         -> Kernel has been updated. Modules of the current kernel
+         -> have been backed up so you can continue to use your
+         -> computer. However, the new kernel will only work
+         -> at next boot.
+
+
+(10/10) Updating the desktop file MIME type cache...

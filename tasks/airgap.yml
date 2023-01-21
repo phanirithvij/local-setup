@@ -1,0 +1,10 @@
+---
+# TODO write a script that downloads all things and saves to airgap/ folder
+# Things to download
+# vagrant install files
+# vagrant boxes
+# python
+# python deps (https://www.linkedin.com/pulse/install-python-libraries-air-gapped-environment-sif-baksh)
+# 
+- name: Download all things airgap
+
