@@ -27,6 +27,10 @@
       community.general.apk:
         name: fish,micro,lf,py3-pip,py3-setuptools
         state: present
+    - name: Remove motd
+      ansible.builtin.file:
+        path: /etc/motd
+        state: absent
     - name: Install python setuptools (pexpect)
       community.general.apk:
         name: py3-pip,py3-setuptools
@@ -61,3 +65,5 @@
       command: 'ansible-galaxy collection install community.windows'
     - name: Setup Windows machine
       command: 'ansible-playbook -v -i /vagrant/inventory.ini --limit="win" /vagrant/winsetup.yml --vault-password-file /vagrant/vault-passwd'
+    - name: Setup Termux
+      command: 'ansible-playbook -v -i /vagrant/inventory.ini --limit="win" /vagrant/termux.yml --vault-password-file /vagrant/vault-passwd'
