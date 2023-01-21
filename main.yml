@@ -11,7 +11,7 @@
         v: micro
   environment:
     ANSIBLE_HOST_KEY_CHECKING: 'False'
-    ANSIBLE_CONFIG: '/vagrant/ansible.cfg'
+    ANSIBLE_CONFIG: '/vagrant/ansible.cfg.ini'
   tasks:
     - name: Customize /etc/environment
       ansible.builtin.lineinfile:
@@ -52,8 +52,12 @@
       shell: 'set -Ux {{item.k}} "{{item.v}}"'
       args:
         executable: fish
+    - name: Verify Env Vars
+      shell: 'cat ~/.config/fish/fish_variables'
+      args:
+        executable: fish
     # TODO idempotent these
     - name: Ensure ansible windows collection is installed
       command: 'ansible-galaxy collection install community.windows'
     - name: Setup Windows machine
-      command: 'ansible-playbook -v -i /vagrant/inventory --limit="win" /vagrant/winsetup.yml --vault-password-file /vagrant/vault-passwd'
+      command: 'ansible-playbook -v -i /vagrant/inventory.ini --limit="win" /vagrant/winsetup.yml --vault-password-file /vagrant/vault-passwd'
