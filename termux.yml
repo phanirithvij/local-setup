@@ -1,0 +1,40 @@
+---
+
+- name: Setup termux
+  hosts: termux
+  gather_facts: no
+  vars:
+    os_environment:
+      - k: EDITOR
+        v: micro
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: 'False'
+    ANSIBLE_CONFIG: '/vagrant/ansible.cfg.ini'
+  tasks:
+    - name: Install python-apt (requirement for apt)
+      command: apt install -y python-apt
+    - name: Update repositories
+      ansible.builtin.apt:
+        update_cache: true
+    - name: Install fish,micro,lf
+      ansible.builtin.apt:
+        name: fish,micro,lf
+        state: present
+    - name: Install python setuptools (pexpect)
+      ansible.builtin.apt:
+        name: py3-pip,py3-setuptools
+        state: present
+    - name: Change shell to fish
+      command: "chsh -s fish"
+    - name: Set Env Vars
+      with_items: "{{ os_environment }}"
+      shell: 'set -Ux {{item.k}} "{{item.v}}"'
+      args:
+        executable: fish
+    - name: Verify Env Vars
+      shell: 'cat ~/.config/fish/fish_variables'
+      args:
+        executable: fish
+    # TODO idempotent these
+    - name: Ensure ansible windows collection is installed
+      command: 'ansible-galaxy collection install community.windows'

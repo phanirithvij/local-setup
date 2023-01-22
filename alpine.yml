@@ -1,0 +1,65 @@
+---
+
+- name: Setup vagrant alpine box
+  hosts: localhost
+  connection: local
+  gather_facts: no
+  become: true
+  vars:
+    os_environment:
+      - k: EDITOR
+        v: micro
+  environment:
+    ANSIBLE_HOST_KEY_CHECKING: 'False'
+    ANSIBLE_CONFIG: '/vagrant/ansible.cfg.ini'
+  tasks:
+    - name: Customize /etc/environment
+      ansible.builtin.lineinfile:
+        dest: "/etc/environment"
+        state: present
+        regexp: "^{{ item.k }}="
+        line: "{{ item.k }}={{ item.v }}"
+      with_items: "{{ os_environment }}"
+    - name: Update repositories
+      community.general.apk:
+        update_cache: true
+    - name: Install fish,micro,lf
+      community.general.apk:
+        name: fish,micro,lf,py3-pip,py3-setuptools
+        state: present
+    - name: Remove motd
+      ansible.builtin.file:
+        path: /etc/motd
+        state: absent
+    - name: Install python setuptools (pexpect)
+      community.general.apk:
+        name: py3-pip,py3-setuptools
+        state: present
+    # https://docs.ansible.com/ansible/latest/collections/ansible/builtin/expect_module.html#requirements
+    - name: Install pexpect (ansible.builtin.expect)
+      pip:
+        name: pexpect
+    - name: Install shadow (chsh)
+      community.general.apk:
+        name: shadow
+        state: present
+    # https://stackoverflow.com/a/47948430/8608146
+    - name: Change shell to fish
+      expect:
+        command: "chsh -s /usr/bin/fish vagrant"
+        responses:
+          (?i)password: "vagrant"
+        creates: ".shell_is_fish"
+      # no_log: true
+    - name: Set Env Vars
+      with_items: "{{ os_environment }}"
+      shell: 'set -Ux {{item.k}} "{{item.v}}"'
+      args:
+        executable: fish
+    - name: Verify Env Vars
+      shell: 'cat ~/.config/fish/fish_variables'
+      args:
+        executable: fish
+    # TODO idempotent this
+    - name: Ensure ansible windows collection is installed
+      command: 'ansible-galaxy collection install community.windows'
