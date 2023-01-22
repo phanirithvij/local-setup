@@ -1,0 +1,22 @@
+---
+- name: Test out cmdb
+  hosts: localhost
+  connection: local
+  gather_facts: yes
+  tasks:
+    - name: Get pip location
+      command: which pip
+      changed_when: false
+      register: piploc
+    - name: Install ansible cmdb
+      ansible.builtin.pip:
+        executable: "{{piploc.stdout}}"
+        name: ansible-cmdb
+        extra_args: --user
+        state: present
+    - name: Create ansible cmdb report
+      shell: |
+        mkdir -p cmdb-out
+        ansible -i ../inventory.ini -m setup --tree cmdb-out/ linux,termux,localhost
+        ansible-cmdb cmdb-out/ > overview.html
+        # rm -rf cmdb-out/

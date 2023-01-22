@@ -62,3 +62,10 @@ For archlinux, win10, termux
   - vscode ext?
   - nvim plugin? (mostlikeynot)
   - awx? (mostlikeynot)
+
+
+## Nice to have
+
+- [ ] Zioxide
+- [ ] Folder based shell history
+  - [ ] navi integration

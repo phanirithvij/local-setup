@@ -7,4 +7,44 @@
 # python deps (https://www.linkedin.com/pulse/install-python-libraries-air-gapped-environment-sif-baksh)
 # 
 - name: Download all things airgap
-
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  tasks:
+    - name: Get pip location
+      command: which pip
+      changed_when: false
+      register: piploc
+    - name: Install tar
+      package:
+        name: tar
+        state: present
+    - name: Check if wheels airgapped already
+      stat:
+        path: ../airgap/python/wheels.tar.gz
+      register: stat_result
+      # TODO idempotency based on tar czf shasum
+      # maybe don't delete directories and use builtin archive
+    - name: Save existing file checksum
+      when: stat_result.stat.exists
+      shell: sha256sum ../airgap/python/wheels.tar.gz | cut -d " " -f1
+      register: shawheel
+    # - name: File doesnt exist
+      # when: not stat_result.stat.exists
+      # shell: echo nil
+      # register: shawheel
+    - name: Create python wheels airgap
+      shell: |
+        cd ../airgap/python
+        mkdir -p wheel
+        {{piploc.stdout}} download -r requirements.txt -d wheel
+        tar czf wheels.tar.gz requirements.txt wheel
+        rm -rf wheel
+        sha256sum wheels.tar.gz | cut -d " " -f1 > .shawheel
+      # when: "shawheel.stdout == 'nil'"
+    - debug:
+        msg: "{{shawheel.stdout}} != {{lookup('file', '../airgap/python/.shawheel')}}"
+    - name: Cleanup
+      file:
+        name: ../airgap/python/.shawheel
+        state: absent
