@@ -11,6 +11,21 @@
   connection: local
   gather_facts: false
   tasks:
+    - name: Download vagrant boxes
+      with_items:
+        - url: "https://app.vagrantup.com/boxomatic/boxes/alpine-3.17/versions/20221221.0.1/providers/virtualbox.box"
+          dest: boxomatic_alpine-3.17_virtualbox.box
+          sha: sha256:0ca098ffe4ee6f26624b6a67ee8ad23928ee5bb29f7610d7fee74b4c856a2c1e
+        - url: "https://app.vagrantup.com/generic/boxes/alpine317/versions/4.2.8/providers/libvirt.box"
+          dest: generic_alpine317_libvirt.box
+          sha: sha256:2e7d9f3a89eec8a86c3fbe6ce28f031639647a7013f3e8bd593382b3a772a302
+        - url: "https://app.vagrantup.com/generic/boxes/alpine317/versions/4.2.8/providers/virtualbox.box"
+          dest: generic_alpine317_virtualbox.box
+          sha: sha256:f97472e7206801aef253a4b1277af767a7af45e7700dea077fbb5e0ebe24b8f4
+      get_url:
+        url: '{{item.url}}'
+        dest: '../airgap/vagrant/boxes/{{item.dest}}'
+        checksum: "{{item.sha}}"
     - name: Get pip location
       command: which pip
       changed_when: false
@@ -19,32 +34,42 @@
       package:
         name: tar
         state: present
-    - name: Check if wheels airgapped already
-      stat:
-        path: ../airgap/python/wheels.tar.gz
-      register: stat_result
-      # TODO idempotency based on tar czf shasum
-      # maybe don't delete directories and use builtin archive
-    - name: Save existing file checksum
-      when: stat_result.stat.exists
-      shell: sha256sum ../airgap/python/wheels.tar.gz | cut -d " " -f1
-      register: shawheel
-    # - name: File doesnt exist
-      # when: not stat_result.stat.exists
-      # shell: echo nil
-      # register: shawheel
+      # TODO move this to a role
     - name: Create python wheels airgap
-      shell: |
-        cd ../airgap/python
-        mkdir -p wheel
-        {{piploc.stdout}} download -r requirements.txt -d wheel
-        tar czf wheels.tar.gz requirements.txt wheel
-        rm -rf wheel
-        sha256sum wheels.tar.gz | cut -d " " -f1 > .shawheel
-      # when: "shawheel.stdout == 'nil'"
-    - debug:
-        msg: "{{shawheel.stdout}} != {{lookup('file', '../airgap/python/.shawheel')}}"
-    - name: Cleanup
-      file:
-        name: ../airgap/python/.shawheel
-        state: absent
+      block:
+        - name: Create a wheel directory if it does not exist
+          file:
+            path: ../airgap/python/wheelhouse
+            state: directory
+            mode: '0755'
+        - name: Download wheels
+          args:
+            chdir: ../airgap/python
+          shell: |
+            {{piploc.stdout}} download -r requirements.txt -d wheelhouse
+            {{piploc.stdout}} download wheel -d wheelhouse
+          register: pipdlout
+          changed_when: "'Saved' in pipdlout.stdout"
+        - name: Prepare wheelhouse
+          community.general.archive:
+            path:
+              - ../airgap/python/wheelhouse/*
+              - ../airgap/python/requirements.txt
+            dest: ../airgap/python/wheelhouse.tgz
+            remove: true
+      # TODO move this to a role
+    - name: Create an offline python virtual environment from wheelhouse
+      block:
+        - name: Unarchive wheelhouse
+          community.general.unarchive:
+            path: ../airgap/python/wheelhouse.tgz
+        - name: Install wheel pip
+          pip:
+            requirements: wheel
+            extra_args: "--no-cache-dir --no-index -f ../airgap/python/wheelhouse"
+        - name: Install python requirements
+          pip:
+            requirements: ../airgap/python/requirements.txt
+            extra_args: "--no-cache-dir --no-index -f ../airgap/python/wheelhouse"
+    - name: Ansible galaxy collections and roles download
+      command: ansible-galaxy collection download -r ../requirements.yml -d ../airgap/ansible/collections

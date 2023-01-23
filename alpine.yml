@@ -60,6 +60,10 @@
       shell: 'cat ~/.config/fish/fish_variables'
       args:
         executable: fish
-    # TODO idempotent this
-    - name: Ensure ansible windows collection is installed
-      command: 'ansible-galaxy collection install community.windows'
+    - name: Check if ansible collections are installed
+      command: 'ansible-galaxy list'
+      register: ansgalx
+    - name: Ensure ansible collections are installed
+      command: 'ansible-galaxy install -r requirements.yml'
+      changed_when: "'collections.windows' in ansgalx.stdout"
+

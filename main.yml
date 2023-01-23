@@ -1,18 +1,35 @@
 ---
 - name: Setup all personal devices
+  hosts: localhost
+  connection: local
+  gather_facts: false
   # TODO multiple hostfiles depending on where ansible is run from?
   # Dymanically generate hostfiles (inventory), maybe use an inventory script?
   # Need to have localhost as the same machine always
   # Need to know if windows or archlinux to have the same ip (dualboot)
+  #   useful for this
+  #     - ansible -m setup
+  #     - ansible_os_family
   environment:
     ANSIBLE_HOST_KEY_CHECKING: 'False'
     ANSIBLE_CONFIG: '/vagrant/ansible.cfg.ini'
+  tasks:
     # TODO idempotent these
     - name: Setup alpine vagrant
       command: 'ansible-playbook -v --limit="alpine" /vagrant/alpine.yml'
+      register: out1
+      changed_when: "not 'changed=0' in out1.stdout"
     - name: Setup Termux
       command: 'ansible-playbook -v --limit="termux" /vagrant/termux.yml'
+      register: out2
+      changed_when: "not 'changed=0' in out2.stdout"
     - name: Setup Windows machine
       command: 'ansible-playbook -v --limit="windows" /vagrant/winsetup.yml'
+      register: out3
+      changed_when: "not 'changed=0' in out3.stdout"
+      ignore_errors: "not 'unreachable=0' in out3.stdout"
     - name: Setup ArchLinux machine
       command: 'ansible-playbook -v --limit="archlinux" /vagrant/archlinux.yml'
+      register: out4
+      changed_when: "not 'changed=0' in out4.stdout"
+      ignore_errors: "not 'unreachable=0' in out3.stdout"
