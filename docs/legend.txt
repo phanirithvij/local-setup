@@ -2,6 +2,6 @@ A  - Android (Termux)
 L  - Linux   (Arch|Manjaro|EndavourOS)
 W  - Windows (10|11)
 V  - Vagrant
-WV - Windows Vagrant
-LV - Linux Vagrant
+VW - Vagrant Windows
+VL - Vagrant Linux
 .  - Self managable (loop)

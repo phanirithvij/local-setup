@@ -9,7 +9,10 @@ logger = logging.getLogger(__name__)
 ALPHABET = "~!@#$$%^&*()_+`1234567890-=[]\\{}|:\";',./<>?qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM"
 
 
-def cat_side(asciiart, gap=4):
+def cat_side(asciiart, gap=4, valign="^", halign="<"):
+    # < top/left
+    # > bottom/right
+    # ^ center/center
     counts = []
     max_widths = []
     ascall = ""
@@ -34,12 +37,14 @@ def cat_side(asciiart, gap=4):
         st = c * missing_char
         # https://stackoverflow.com/a/5676884
         # https://peps.python.org/pep-0498/
-        # use > < ^ for alignment https://docs.python.org/2/library/string.html#format-specification-mini-language
-        asciiart[i] = format(st, f"\n^{maxl}").replace(st, asciiart[i])
+        # use > < ^ for alignment
+        # https://docs.python.org/2/library/string.html#format-specification-mini-language
+        asciiart[i] = format(st, f"\n{valign}{maxl}").replace(st, asciiart[i])
     res = ""
     # https://stackoverflow.com/a/59211229
+    alignfmt = f" {halign}{min(max_widths)+gap}"
     for lines in zip(*map(str.splitlines, asciiart)):
-        res += "".join(line.ljust(min(max_widths) + gap) for line in lines) + "\n"
+        res += "".join(format(line, alignfmt) for line in lines) + "\n"
     return res
 
 

@@ -1,0 +1,54 @@
+---
+- name: Setup Arch
+  hosts: linux
+  gather_facts: true
+  tasks:
+    - name: Ensure pip is installed
+      tags:
+        - skip
+      command: python -m ensurepip --upgrade
+      register: enspip
+      changed_when: "'Successfully installed pip' in enspip.stdout"
+    - name: Get pip location
+      command: which pip
+      changed_when: false
+      register: piploc
+    - name: Install pipx
+      ansible.builtin.pip:
+        executable: "{{piploc.stdout}}"
+        name: pipx
+        extra_args: --user
+        state: present
+    - name: Pipx upgrade all packages
+      tags:
+        - always
+        - update
+      command: pipx upgrade-all
+      register: pipxupgdall
+      changed_when: "not 'Versions did not change' in pipxupgdall.stdout"
+    - name: Pipx install latest packages
+      tags:
+        - init
+      with_items:
+        - name: ansible
+        - name: ansible-lint
+        - name: asciinema
+        - name: gallery-dl
+        - name: gitfive
+        - name: jrnl
+        - name: manga-py
+        - name: mitmproxy
+        - name: tg-login
+        - name: tldr
+        - name: tmuxp
+        - name: yt-dlp
+      community.general.pipx:
+        name: "{{item.name}}"
+        state: latest
+    - name: Pipx install tmuxp@next
+      tags:
+        - skip
+      community.general.pipx:
+        name: tmuxp
+        state: latest
+        pip_args: '\--pre'

@@ -66,4 +66,3 @@
     - name: Ensure ansible collections are installed
       command: 'ansible-galaxy install -r requirements.yml'
       changed_when: "'collections.windows' in ansgalx.stdout"
-
