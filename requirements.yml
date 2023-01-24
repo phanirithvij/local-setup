@@ -2,4 +2,3 @@ collections:
   - name: community.windows
 roles:
   - name: robertdebock.bootstrap
-  - name: geerlingguy.pip
