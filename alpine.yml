@@ -12,6 +12,7 @@
   environment:
     ANSIBLE_HOST_KEY_CHECKING: 'False'
     ANSIBLE_CONFIG: '/vagrant/ansible.cfg.ini'
+    ANSIBLE_FORCE_COLOR: "1"
   tasks:
     - name: Customize /etc/environment
       ansible.builtin.lineinfile:
