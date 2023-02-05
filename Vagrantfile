@@ -3,6 +3,9 @@ Vagrant.configure("2") do |config|
 		# config.vm.network "forwarded_port", guest: 80, host: 8180
 		# config.vm.synced_folder ".", "/vagrant", type: "rsync", rsync__args: ["--verbose", "--archive", "--delete", "-z"]
 		alpine.vm.synced_folder ".", "/vagrant", SharedFoldersEnableSymlinksCreate: true
+		# alpine.vm.synced_folder "./home", "/home/vagrant", owner: "vagrant",
+		  # group: "vagrant", SharedFoldersEnableSymlinksCreate: true
+    # https://stackoverflow.com/a/39759154
 		# alpine.vm.network "public_network", ip: "192.168.1.250"
 		alpine.vm.box = "boxomatic/alpine-3.17"
 		alpine.vm.box_version = "20221221.0.1"
