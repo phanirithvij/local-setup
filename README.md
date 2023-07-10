@@ -6,6 +6,10 @@ For archlinux, win10, termux
 
 ## TODO
 
+- general
+  - [ ] ara
+  - [ ] graphviz visual
+
 - win10
   - [ ] scoop
   - [ ] choco
