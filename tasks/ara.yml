@@ -1,17 +1,17 @@
 ---
-- name: Test out cmdb
+- name: Test out ara
   hosts: localhost
   connection: local
-  gather_facts: false 
+  gather_facts: false
   tasks:
     - name: Get pip location
       command: which pip
       changed_when: false
       register: piploc
-    - name: Install ansible cmdb
+    - name: Install ansible ara
       ansible.builtin.pip:
         executable: "{{piploc.stdout}}"
-        name: ansible-cmdb
+        name: "ara[server]"
         extra_args: --user
         state: present
     - name: Create ansible cmdb report
